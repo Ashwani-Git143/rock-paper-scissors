@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rock-paper-scissors</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
     <!-- header -->
@@ -33,7 +36,7 @@
           <!-- Section1 Animation -->
            <section class="animation">
             <div class="player-choice">
-              ❓
+              🪨
             </div>
             <div class="vs">
                 VS
@@ -51,10 +54,23 @@
       </section>
 
       <section class="controls">
-         <button type="button" class="btn btn-rock">🪨 Rock</button>
-         <button type="button" class="btn btn-paper">📄 Paper</button>
-         <button type="button" class="btn btn-scissors">✂️ Scissors</button>
-         <button type="button" class="btn btn-reset">🔄 Reset</button>
+         <button type="button" class="btn btn-rock">
+            <span class="btn-icon">🪨</span> 
+            <span class="btn-label">Rock</span>
+        </button>
+         <button type="button" class="btn btn-paper">
+            <span class="btn-icon">📄</span>
+            <span class="btn-label">Paper</span>
+            
+        </button>
+         <button type="button" class="btn btn-scissors">
+            <span class="btn-icon">✂️</span> 
+            <span class="btn-label">Scissors</span>
+             </button>
+         <button type="button" class="btn btn-reset">
+            <span class="btn-icon">🔄</span> 
+            <span class="btn-label">Reset</span>
+             </button>
       </section>
     </main>
 </body>
