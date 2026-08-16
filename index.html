@@ -16,19 +16,42 @@
     <main class="game-layout">
          <!-- aside -->
       <aside class="sidebar">
+         
             <!-- section1 History -->
-            <section class="history box" >
-                <h2>Game History</h2>
+            <section class="history box">
+                  <div class="game-rules">
+            <h2>How to play</h2>
+            <ul>
+                <li>🪨 Rock beats ✂️ Scissors</li>
+                <li>📄 Paper beats 🪨 Rock</li>
+                <li>✂️ Scissors beats 📄 Paper</li>
+            </ul>
+            <p>Choose your move to start the game</p>
+           </div>
+            <div class="history-content" hidden>
+                  <h2>Game History</h2>
                 <div class="history-list">
-            
+                
                 </div>
+            </div>
             </section>
             <!-- Section 2 Statistics -->
             <section class="statistics box">
                 <h2>Statistics</h2>
-                <p>Wins:<span id="wins">0</span></p>
-                <p>Losses:<span id="losses">0</span></p>
-                <p>Draws:<span id="draws">0</span></p>
+               <div class="statistics-content">
+                <div class="stat">
+                    <span class="stat-label">Wins</span>
+                    <span class="stat-value" id="wins">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Losses</span>
+                    <span class="stat-value" id="losses">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Draws</span>
+                    <span class="stat-value" id="draws">0</span>
+                </div>
+               </div>
             </section>
       </aside>
 
