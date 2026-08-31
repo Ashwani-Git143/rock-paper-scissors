@@ -1,4 +1,4 @@
-:root{
+/* :root{
     --bg-color:#f5f5f5;
     --card-color:#ffffff;
     --primary-color:#245bd1;
@@ -7,8 +7,16 @@
     --text-color:#222;
     --border-radius:.75rem;
     --shadow:0 .25rem .75rem rgba(0,0,0,.1);
+} */
+:root {
+    --bg-color: #243963;
+    --card-color: #435d8d;
+    --primary-color: #25407b;
+    --secondary-color: #6f87d7;
+    --text-color: #f8fafc;
+    --border-radius: 0.75rem;
+    --shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3);
 }
-
 body{
     background: var(--bg-color);
     color: var(--text-color);
@@ -27,14 +35,16 @@ body{
 
 .game-layout{
     flex: 1;
+
     display: grid;
     grid-template-columns: 300px 1fr;
     grid-template-rows: 1fr auto;
 }
 .sidebar{
+    grid-row: 1/-1;
     background-color: var(--secondary-color);
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
     gap:1rem;
     padding: 1rem;
    
@@ -42,6 +52,7 @@ body{
 .box{
     background-color: var(--card-color);
     border-radius: var(--border-radius);
+    color: var(--text-color);
     padding: 0.76rem;
     box-shadow: var(--shadow);
 }
@@ -72,6 +83,9 @@ body{
 .history-list{
     overflow-y: auto;
 }
+.statistics{
+    height: 7rem;
+}
 .statistics-content{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -92,11 +106,12 @@ body{
     font-weight: 700;
 }
 .controls{
-    grid-column: 1/-1;
+    grid-column: 2;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    background-color: var(--primary-color);
     padding: 1rem;
 }
 .animation-area{
@@ -108,11 +123,50 @@ body{
     display: flex;
 
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
+    padding: 2rem;
+}
+.player-choice,
+.computer-choice{
+    height: 14rem;
+    width: 11rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid #334155;
+    border-radius: var(--border-radius);
+    background-color: var(--card-color);
+    box-shadow: var(--shadow);
+}
+.player-choice img,
+.computer-choice img{
+    width: 7rem;
+    height: 7rem;
+    object-fit: contain;
+}
+.vs{
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.75rem;
+}
+.result{
+    text-align: center;
+    padding: 1rem;
+    border: 2px solid #334155;
+}
+.result h2{
+    margin-bottom: 0.5rem;
+}
+.result-message{
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
 }
 .btn{
-    height: 15dvh;
+    height: 8rem;
     width: 30%;
     display: flex;
     flex-direction: column;
