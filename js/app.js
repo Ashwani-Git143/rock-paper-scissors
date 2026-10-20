@@ -76,6 +76,13 @@ function playGame(playerMove){
     const computerMove =getComputerChoice();
     setTimeout(()=>{
         stopAnimation(playerMove,computerMove);
+        const result = getWinner(playerMove,computerMove);
+        updateScore(result);
+        document.querySelector(".result-message").textContent=
+              result === "win"? "You Win!":
+                        result ==="loss" ?"you Lose!":"It's is a Draw!";
+                        
+              
     },2000);
 }
 // reset button event
@@ -91,4 +98,47 @@ const Com_choices = ["rock", "paper", "scissors"];
 function getComputerChoice(){
     const index = Math.floor(Math.random()* Com_choices.length);
     return Com_choices[index];
+}
+
+
+
+
+
+
+
+
+
+
+//  winner 
+
+function getWinner(playerMove,computerMove){
+    if(playerMove == computerMove)return "draw";
+
+    if(
+        (playerChoice === "rock" && computerMove === "scissors") ||
+        (playerMove === "paper" && computerMove ==="rock") ||
+        (playerMove ==="scissors" && computerMove === "paper")
+    )return "win";
+
+    return "loss";
+}
+
+
+let wins = 0;
+let losses = 0;
+let draws = 0;
+
+const winElement = document.querySelector("#wins");
+const lossesElement = document.querySelector("#losses");
+const drawsElement = document.querySelector("#draws");
+
+
+function updateScore(result){
+  if(result == "win")wins++;
+  else if(result == "loss")losses++;
+  else draws++;
+
+  winElement.textContent = wins;
+  lossesElement.textContent = losses;
+  drawsElement.textContent = draws;
 }
