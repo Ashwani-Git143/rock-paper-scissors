@@ -19,7 +19,7 @@ A browser-based Rock Paper Scissors game built using HTML, CSS, and JavaScript.
 - JavaScript — game logic and DOM manipulation
 
 ## Project Structure
-
+```
 rock-paper-scissors/
 ├── index.html
 ├── css/
@@ -33,7 +33,7 @@ rock-paper-scissors/
 │   ├── paper.png
 │   └── scissor.png
 └── README.md
-
+```
 
 ## How to Run
 
