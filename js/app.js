@@ -69,27 +69,33 @@ function stopAnimation(playerMove,computerMove){
 
 rockButton.addEventListener("click", ()=> playGame("rock"));
 paperButton.addEventListener("click",()=>playGame("paper"));
-scissorsButton.addEventListener("click",()=> playGame("scissor"));
-function playGame(playerMove){
-    startAnimation();
+scissorsButton.addEventListener("click",()=> playGame("scissors"));
 
+let gameTimeout;
+function playGame(playerMove){
+     toggleMoveButtons(true);
+     startAnimation();
+    
     const computerMove =getComputerChoice();
-    setTimeout(()=>{
+    
+    gameTimeout =  setTimeout(()=>{
         stopAnimation(playerMove,computerMove);
         const result = getWinner(playerMove,computerMove);
         updateScore(result);
-        document.querySelector(".result-message").textContent=
+        updateHistory(playerMove,computerMove,result);
+
+        const resultMessage=document.querySelector(".result-message");
+        resultMessage.textContent=
               result === "win"? "You Win!":
-                        result ==="loss" ?"you Lose!":"It's is a Draw!";
-                        
+              result ==="loss" ?"you Lose!":"It's is a Draw!";
+
+        resultMessage.className=`result-message ${result}`;
+        toggleMoveButtons(false);             
               
     },2000);
 }
 // reset button event
-resetButton.addEventListener("click",()=>{
-    clearInterval(animationInterval);
-})
-
+resetButton.addEventListener("click",resetGame)
 
 // computer animation
 const computerChoice =document.querySelector(".computer-choice img");
@@ -101,21 +107,13 @@ function getComputerChoice(){
 }
 
 
-
-
-
-
-
-
-
-
 //  winner 
 
 function getWinner(playerMove,computerMove){
     if(playerMove == computerMove)return "draw";
 
     if(
-        (playerChoice === "rock" && computerMove === "scissors") ||
+        (playerMove === "rock" && computerMove === "scissors") ||
         (playerMove === "paper" && computerMove ==="rock") ||
         (playerMove ==="scissors" && computerMove === "paper")
     )return "win";
@@ -127,11 +125,15 @@ function getWinner(playerMove,computerMove){
 let wins = 0;
 let losses = 0;
 let draws = 0;
+let gameCount =0;
+
 
 const winElement = document.querySelector("#wins");
 const lossesElement = document.querySelector("#losses");
 const drawsElement = document.querySelector("#draws");
 
+const historyList = document.querySelector(".history-list");
+const historySection = document.querySelector(".history");
 
 function updateScore(result){
   if(result == "win")wins++;
@@ -141,4 +143,54 @@ function updateScore(result){
   winElement.textContent = wins;
   lossesElement.textContent = losses;
   drawsElement.textContent = draws;
+}
+
+function updateHistory(playerMove,computerMove,result){
+    gameCount++;
+
+    const historyItem = document.createElement("tr");
+   historyItem.innerHTML=`
+        <td>${gameCount}</td>
+        <td>${playerMove}</td>
+        <td>${computerMove}</td>
+        <td class="${result}">${result.toUpperCase()}</td>
+   `
+    
+    historyList.prepend(historyItem);
+    while(historyList.children.length> 5){
+        historyList.removeChild(historyList.lastChild);
+    }
+    document.querySelector(".game-rules").hidden = true;
+    document.querySelector(".history-content").hidden = false;
+}
+function resetGame(){
+    console.log("Reset function called");
+    clearInterval(animationInterval);
+    clearTimeout(gameTimeout);
+    toggleMoveButtons(false);
+    wins = 0;
+    losses = 0;
+    draws = 0;
+
+    gameCount = 0;
+
+    winElement.textContent = wins;
+    lossesElement.textContent = losses;
+    drawsElement.textContent = draws;
+    historyList.innerHTML = "";
+    document.querySelector(".game-rules").hidden  = false;
+    document.querySelector(".history-content").hidden = true;
+
+    playerChoice.src = choices.rock;
+    computerChoice.src=choices.rock;
+    const resultMessage=document.querySelector(".result-message")
+    resultMessage.textContent="Choose your move!";
+    resultMessage.className="result-message";
+
+}
+
+function toggleMoveButtons(disabled){
+    rockButton.disabled = disabled;
+    paperButton.disabled = disabled;
+    scissorsButton.disabled = disabled;
 }
